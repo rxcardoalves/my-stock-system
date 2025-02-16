@@ -1,0 +1,35 @@
+{% extends 'base_temp.html' %}
+
+{% block title %}Home - SorrentoStudio.co za{% endblock %}
+
+{% block content %}
+    <h1>Stock Items</h1>
+
+    {% if stock_list %}
+        <!-- Displaying a list of stock items if stock_list is not
+         empty -->
+        <ul>
+            {% for item in stock_list %}
+                <li>
+                    <h2>
+                        <!-- Link to edit the individual stock item -->
+                        <a href="{% url 'edit_stock' item.id %}">
+                            {{ item.title }}</a>
+                    </h2>
+                    <p><strong>Description:</strong> 
+                        {{ item.description }}</p>
+                    <p><strong>In Stock:</strong> 
+                        {{ item.qty }}</p>
+                    <p><strong>Available Stock:</strong> 
+                        {{ item.available_stock }}</p>
+                    <p><strong>In Maintenance:</strong> 
+                        {{ item.maintenance_quantity }}</p>
+
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <!-- Message displayed if no stock items exist -->
+        <P>No stock items added.</P>
+    {% endif %}
+{% endblock %}
