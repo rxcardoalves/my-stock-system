@@ -1,0 +1,47 @@
+{% extends 'base_temp.html' %}
+
+{% block title %}Users - MySite.co.za{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">User List</h1>
+<hr>
+
+<!-- Responsive table to display the list of users, their usernames, and
+ statuses. -->
+<div class="table-responsive">
+    <table class="table table-striped table-bordered text-center">
+        <!-- Table headers for Username and Status columns -->
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through the users and display each user's
+             details -->
+            {% for user in users %}
+            <tr>
+                <!-- Username column with a link to the 'edit_user'
+                 page -->
+                <td><a href="{% url 'user_auth:edit_user' user.id %}">
+                    {{ user.username }}</a></td>
+                <!-- Status column with a badge showing if the user is
+                 active or inactive -->
+                <td>
+                    {% if user.is_active %}
+                        <span class="badge bg-success">Active</span>
+                    {% else %}
+                        <span class="badge bg-danger">Inactive</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Button to navigate to the user registration page -->
+<a href="{% url 'user_auth:register' %}" class="btn btn-primary">Register</a>
+
+{% endblock %}

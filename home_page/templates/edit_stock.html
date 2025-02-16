@@ -1,0 +1,39 @@
+{% extends 'base_temp.html' %}
+
+{% block title %}Edit Stock - SorrentoStudio.co za{% endblock %}
+
+{% block content %}
+    <h1>Edit Stock</h1>
+    
+    {% if user.is_authenticated %}
+    <!-- Form for editing stock details (only visible to authenticated
+     users) -->
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <!-- Button to save changes -->
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <!-- Button to cancel editing and return to stock index -->
+        <a href="{% url 'stock-index' %}" class="btn btn-secondary">Cancel</a>
+        <!-- Button to add stock item to maintenance details -->
+        <a href="{% url 'maintenance_detail' pk=stock_item.pk %}" 
+        class="btn btn-warning">Add to Maintenance</a>
+    </form>
+    <hr>
+
+    <!-- Displaying detailed information about the stock item -->
+    <h2>{{ stock_item.title }}</h2>
+    <p><strong>Description:</strong> {{ stock_item.description }}</p>
+    <p><strong>Stock Qty:</strong> {{ stock_item.qty }}</p>
+    <p><strong>Maintenance Qty:</strong> 
+        {{ stock_item.maintenance_quantity }}</p>
+    <p><strong>Maintenance Notes:</strong> 
+        {{ stock_item.maintenance_notes }}</p>
+    {% else %}
+        <!-- Message to prompt the user to log in if not
+         authenticated -->
+        <br><p>User Login required.</p>
+            <a href="{% url 'user_auth:login' %}" class="btn btn-primary"
+            >Login</a>
+    {% endif %}
+{% endblock %}

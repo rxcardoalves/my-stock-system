@@ -1,0 +1,28 @@
+{% extends 'base_temp.html' %}
+
+{% block title %}Maintenance Detail - SorrentoStudio.co za{% endblock %}
+
+{% block content %}
+    <h1>Maintenance Detail</h1>
+
+    <!-- Form to update maintenance details -->
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{% url 'maintenance_list' %}" class="btn btn-secondary"
+        >Cancel</a>
+        
+    </form>
+    <hr>
+
+    <!-- Display stock item details -->
+    <h2>{{ stock_item.title }}</h2>
+    <p><strong>Description:</strong> {{ stock_item.description }}</p>
+    <p><strong>Stock Qty:</strong> {{ stock_item.qty }}</p>
+    <p><strong>Maintenance Qty:</strong> 
+        {{ stock_item.maintenance_quantity }}</p>
+    <p><strong>Maintenance Notes:</strong> 
+        {{ stock_item.maintenance_notes }}</p>
+
+{% endblock %}

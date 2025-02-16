@@ -1,0 +1,42 @@
+{% extends 'base_temp.html' %}
+
+{% block title %}Edit User - MySite.co.za{% endblock %}
+
+{% block content %}
+<h1>Edit User</h1>
+<hr>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">User Details</h5>
+        <!-- Displaying the user's current details (Username, Email,
+         and Name) -->
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}
+        </p>
+        
+        <!-- Form for editing the user's active status -->
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- Dropdown to toggle between active/inactive status of
+             the user -->
+            <label for="is_active" class="form-label">Active Status:</label>
+            <select name="is_active" id="is_active" class="form-select">
+                <option value="true" {% if user.is_active %}selected{% endif %}
+                >Active</option>
+                <option value="false" {% if not user.is_active %}selected
+                {% endif %}>Inactive</option>
+            </select>
+            <button type="submit" class="btn btn-primary mt-3">
+                Save Changes</button>
+        </form>
+    </div>
+</div>
+
+<!-- Link to return to the list of users -->
+<a href="{% url 'user_auth:user_list' %}" class="btn btn-secondary mt-3">
+    Back to Users</a>
+
+{% endblock %}

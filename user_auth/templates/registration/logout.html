@@ -1,0 +1,13 @@
+{% extends 'base_temp.html' %}
+
+{% block title %}Logout - MySite.co.za{% endblock %}
+
+{% block content %}
+<!-- Logout Confirmation Page -->
+<h1>Logged out!</h1>
+<p>You are logged out.</p>
+
+<!-- Link to the Login Page for returning users -->
+<a href="{% url 'user_auth:login' %}" class="btn btn-primary">Login</a>
+
+{% endblock %}

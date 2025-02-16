@@ -1,0 +1,25 @@
+{% extends 'base_temp.html' %}
+
+{% block title %}Login - MySite.co.za{% endblock %}
+
+{% block content %}
+<h1> User Login </h1>
+<hr>
+
+<!-- Login form -->
+<form action="{% url 'user_auth:authenticate_user' %}" method="post">
+    {% csrf_token %}
+
+    <label>Username</label>
+    <input type="text" name="username" required>
+    
+    <label>Password</label>
+    <input type="password" name="password" required>
+    <br><br>
+
+    <input type="submit" value="Login" class="btn btn-primary" />
+</form>
+<br>
+
+</form>
+{% endblock %}

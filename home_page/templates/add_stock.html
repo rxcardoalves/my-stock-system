@@ -1,0 +1,19 @@
+{% extends 'base_temp.html' %}
+
+{% block title %}Add Stock - SorrentoStudio.co za{% endblock %}
+
+{% block content %}
+    <h1>Add Stock</h1>
+
+    <!-- Display the stock add form if the user is authenticated. -->
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Add Stock</button>
+        </form>
+    {% else %}
+    <br><p>User Login required.</p>
+        <a href="{% url 'user_auth:login' %}" class="btn btn-primary">Login</a>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base_temp.html' %}
+
+{% block title %}Maintenance List - SorrentoStudio.co za{% endblock %}
+
+{% block content %}
+    <h1>Maintenance List</h1>
+
+    {% if maintenance_list %}
+        <!-- Display the list of items that require maintenance -->
+        <ul>
+            {% for item in maintenance_list %}
+                <li>
+                    <h2>
+                        <!-- Link to add or update maintenance details
+                         for the stock item -->
+                        <a href="{% url 'add_to_maintenance' item.id %}">
+                            {{ item.title }}</a>
+                    </h2>
+                    <p><strong>Description:</strong> {{ item.description }}</p>
+                    <p><strong>Quantity in Stock:</strong> {{ item.qty }}</p>
+                    <p><strong>Maintenance Quantity:</strong> 
+                        {{ item.maintenance_quantity }}</p>
+                    <p><strong>Maintenance Notes:</strong> 
+                        {{ item.maintenance_notes }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <!-- Message displayed when there are no items requiring
+         maintenance -->
+        <P>No required maintenance.</P>
+    {% endif %}
+{% endblock %}
