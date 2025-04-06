@@ -100,11 +100,13 @@ def maintenance_detail(request, pk):
         form = MaintenanceStockForm(request.POST, instance=stock_item)
         if form.is_valid():
             form.save()
-            return redirect('maintenance_list')  # Redirect after update.
+            return redirect('maintenance_list')
+    else:
         form = MaintenanceStockForm(instance=stock_item)
 
     return render(request, 'maintenance_detail.html', {
-        'form': form, 'stock_item': stock_item
+        'form': form,
+        'stock_item': stock_item
     })
 
 
